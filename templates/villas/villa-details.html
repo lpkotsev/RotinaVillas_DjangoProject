@@ -1,0 +1,77 @@
+{% extends "shared/base.html" %}
+
+{% block content %}
+
+<h2>{{ villa.name }}</h2>
+
+<img src="{{ villa.image_url }}" class="img-fluid mb-3">
+
+<p>
+<strong>Location:</strong>
+{{ villa.location }}
+</p>
+
+<p>
+<strong>Description:</strong>
+{{ villa.description }}
+</p>
+
+<p>Average Rating: {{ villa.average_rating }}</p>
+
+<p>
+<strong>Price:</strong>
+€{{ villa.price_per_night }} per night
+</p>
+
+<p>
+<strong>Capacity:</strong>
+{{ villa.capacity }} guests
+</p>
+<h4 class="mt-4">Amenities</h4>
+
+<div class="row">
+
+{% for amenity in villa.amenities.all %}
+
+<div class="col-md-4 col-sm-6 mb-2">
+    ✓ {{ amenity.name }}
+</div>
+
+{% endfor %}
+
+</div>
+
+<a href="{% url 'booking-create' villa.pk %}"
+   class="btn btn-success">
+   Book Now
+</a>
+
+<a href="{% url 'review-create' villa.pk %}" class="btn btn-primary">
+Leave Review
+</a>
+
+<h3>Reviews</h3>
+
+{% for review in villa.reviews.all %}
+
+<div class="card mb-2">
+
+<div class="card-body">
+
+<strong>{{ review.guest_name }}</strong>
+
+<p>Rating: {{ review.rating }}/5</p>
+
+<p>{{ review.comment }}</p>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<p>No reviews yet.</p>
+
+{% endfor %}
+
+{% endblock %}

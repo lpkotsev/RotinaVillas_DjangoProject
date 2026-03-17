@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+
+    <a class="navbar-brand" href="/">RotinaVillas</a>
+
+    <div class="navbar-nav ms-auto">
+
+        <a class="nav-link" href="{% url 'villa-list' %}">
+            Browse Villas
+        </a>
+
+        <a class="nav-link" href="{% url 'villa-create' %}">
+            Create Villa to Hire
+        </a>
+
+        <a class="nav-link" href="{% url 'my-villas' %}">
+            My Hired Villas
+        </a>
+
+        <a class="nav-link" href="{% url 'my-bookings' %}">
+            My Bookings
+        </a>
+
+        <a class="nav-link" href="{% url 'about' %}">
+            About
+        </a>
+
+        <a class="nav-link" href="{% url 'contacts' %}">
+            Contacts
+        </a>
+
+    </div>
+
+  </div>
+</nav>

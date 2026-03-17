@@ -1,0 +1,49 @@
+{% extends "shared/base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2>My Hired Villas</h2>
+
+<div class="row mt-4">
+
+{% for villa in villas %}
+
+<div class="col-md-4">
+
+<div class="card villa-card">
+
+<img src="{{ villa.image_url }}" class="villa-img">
+
+<div class="card-body">
+
+<h5>{{ villa.name }}</h5>
+
+<p>{{ villa.location }}</p>
+
+<a href="{% url 'villa-details' villa.pk %}" class="btn btn-primary btn-sm">
+Details
+</a>
+
+<a href="{% url 'villa-edit' villa.pk %}" class="btn btn-warning btn-sm">
+✏
+</a>
+
+<a href="{% url 'villa-delete' villa.pk %}" class="btn btn-danger btn-sm">
+🗑
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}

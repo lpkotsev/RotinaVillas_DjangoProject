@@ -1,0 +1,15 @@
+{% extends "shared/base.html" %}
+
+{% block content %}
+
+<h2>Booking Confirmed</h2>
+
+<p>
+Your villa has been successfully booked.
+</p>
+
+<a href="{% url 'villa-list' %}" class="btn btn-primary">
+Browse More Villas
+</a>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "shared/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="mb-4">About RotinaVillas</h2>
+
+<p>
+RotinaVillas is a platform dedicated to helping travelers discover
+beautiful and luxurious villas around the world.
+Whether you're looking for a relaxing beach escape, a peaceful mountain
+retreat, or a stylish city stay, our curated collection of villas
+offers something for every traveler.
+</p>
+
+<p>
+Our mission is simple: make finding and booking the perfect villa easy,
+inspiring, and unforgettable.
+</p>
+
+<div class="row mt-5">
+
+<div class="col-md-4">
+<img src="{% static 'images/villa1.jpg' %}" class="img-fluid rounded shadow">
+</div>
+
+<div class="col-md-4">
+<img src="{% static 'images/villa2.jpg' %}" class="img-fluid rounded shadow">
+</div>
+
+<div class="col-md-4">
+<img src="{% static 'images/villa3.jpg' %}" class="img-fluid rounded shadow">
+</div>
+
+</div>
+
+<div class="mt-5">
+
+<h4>Why Choose RotinaVillas?</h4>
+
+<ul>
+<li>Carefully selected luxury villas</li>
+<li>Simple and secure booking process</li>
+<li>Beautiful destinations worldwide</li>
+<li>Trusted by travelers</li>
+</ul>
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "shared/base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2>My Bookings</h2>
+
+<table class="table mt-4">
+
+<thead>
+<tr>
+<th>Villa</th>
+<th>Guest</th>
+<th>Check-in</th>
+<th>Check-out</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for booking in bookings %}
+
+<tr>
+<td>{{ booking.villa.name }}</td>
+<td>{{ booking.guest_name }}</td>
+<td>{{ booking.check_in }}</td>
+<td>{{ booking.check_out }}</td>
+
+<td>
+
+<a href="{% url 'booking-edit' booking.pk %}" class="btn btn-warning btn-sm">
+✏
+</a>
+
+<a href="{% url 'booking-delete' booking.pk %}" class="btn btn-danger btn-sm">
+🗑
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

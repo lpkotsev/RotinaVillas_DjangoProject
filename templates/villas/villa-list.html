@@ -1,0 +1,52 @@
+{% extends "shared/base.html" %}
+{% load static %}
+{% block content %}
+{% load villa_extras %}
+
+<h2>Available Villas</h2>
+
+<div class="row">
+
+{% for villa in villas %}
+
+<div class="col-md-4">
+
+<div class="card villa-card mb-4 shadow-sm">
+
+<img src="{% static 'images/'|add:villa.image_url %}"
+     class="card-img-top villa-img"
+     alt="{{ villa.name }}">
+
+<div class="card-body">
+
+<h5 class="card-title">
+{{ villa.name }}
+</h5>
+
+<p>
+{{ villa.location }}
+</p>
+
+<p>
+€{{ villa.price_per_night }} per night
+</p>
+
+<a href="{% url 'villa-details' villa.pk %}" class="btn btn-primary">
+View Details
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<p>No villas available yet.</p>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

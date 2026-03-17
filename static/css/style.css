@@ -1,0 +1,117 @@
+/* Remove page spacing */
+
+html, body{
+    margin:0;
+    padding:0;
+    height:100%;
+}
+
+
+/* HERO SECTION */
+
+.hero{
+    position:relative;
+    height:100vh;
+    width:100%;
+    overflow:hidden;
+}
+
+
+/* Video fills screen without stretching */
+
+.hero-video{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+
+/* Dark overlay */
+
+.hero-overlay{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,0.45);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+/* Centered text */
+
+.hero-text{
+    text-align:center;
+    color:white;
+    max-width:700px;
+}
+
+
+/* Title */
+
+.hero-text h1{
+    font-size:64px;
+    margin-bottom:20px;
+    text-shadow:0 3px 10px rgba(0,0,0,0.8);
+}
+
+
+/* Subtitle */
+
+.hero-text p{
+    font-size:24px;
+    margin-bottom:35px;
+    text-shadow:0 3px 10px rgba(0,0,0,0.8);
+}
+
+
+/* Button */
+
+.hero-button{
+    padding:16px 40px;
+    font-size:20px;
+    background:#ff5a5f;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+
+.hero-button:hover{
+    background:#e14a4f;
+    transform:scale(1.05);
+}
+
+.villa-img{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+}
+
+.villa-card{
+    height:100%;
+}
+
+.villa-card{
+    transition:0.3s;
+}
+
+.villa-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 10px 20px rgba(0,0,0,0.15);
+}
+
+.villa-card{
+    border-radius:12px;
+    overflow:hidden;
+}
