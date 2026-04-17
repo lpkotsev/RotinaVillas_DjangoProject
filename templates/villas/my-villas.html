@@ -1,5 +1,5 @@
 {% extends "shared/base.html" %}
-
+{% load static %}
 {% block content %}
 
 <div class="container mt-5">
@@ -14,7 +14,7 @@
 
 <div class="card villa-card">
 
-<img src="{{ villa.image_url }}" class="villa-img">
+<img src="{% static 'images/'|add:villa.image_url %}" class="villa-img">
 
 <div class="card-body">
 

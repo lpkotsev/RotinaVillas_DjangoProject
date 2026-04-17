@@ -6,7 +6,15 @@ class VillaCreateForm(forms.ModelForm):
 
     class Meta:
         model = Villa
-        exclude = ("created_at",)
+        fields = [
+            "name",
+            "description",
+            "price_per_night",
+            "location",
+            "villa_type",
+            "capacity",
+            "image_url",
+        ]
         labels = {
             "price_per_night": "Price per night (€)"
         }

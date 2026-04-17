@@ -1,13 +1,6 @@
 from django.urls import path
-from .views import create_review
-
+from .views import ReviewCreateView
 
 urlpatterns = [
-
-    path(
-        "create/<int:pk>/",
-        create_review,
-        name="review-create"
-    ),
-
+    path("create/<int:pk>/", ReviewCreateView.as_view(), name="review-create"),
 ]

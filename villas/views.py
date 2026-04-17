@@ -1,9 +1,11 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Villa
 from .forms import VillaCreateForm, VillaEditForm
-
+from django.views import View
+from django.shortcuts import render, redirect
+from .forms import VillaCreateForm
 
 class VillaListView(ListView):
 
@@ -21,15 +23,17 @@ class VillaDetailView(DetailView):
     template_name = "villas/villa-details.html"
 
 
-class VillaCreateView(CreateView):
+class VillaCreateView(LoginRequiredMixin, CreateView):
+     model = Villa
+     form_class = VillaCreateForm
+     template_name = 'villas/villa-create.html'
+     success_url = reverse_lazy('villa-list')
 
-    model = Villa
+     def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
 
-    form_class = VillaCreateForm
 
-    template_name = "villas/villa-create.html"
-
-    success_url = reverse_lazy("villa-list")
 
 
 class VillaEditView(UpdateView):
@@ -53,5 +57,8 @@ class MyVillasView(ListView):
     model = Villa
     template_name = "villas/my-villas.html"
     context_object_name = "villas"
+
+    def get_queryset(self):
+        return Villa.objects.filter(owner=self.request.user)
 
 # Create your views here.

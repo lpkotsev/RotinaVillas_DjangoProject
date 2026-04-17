@@ -1,35 +1,30 @@
-from django.shortcuts import render, redirect, get_object_or_404
-
-from villas.models import Villa
+from django.views.generic import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
+from .models import Review
 from .forms import ReviewForm
+from villas.models import Villa
+from django.shortcuts import redirect
 
+class ReviewCreateView(LoginRequiredMixin, CreateView):
+    model = Review
+    form_class = ReviewForm
+    template_name = "reviews/review_create.html"
 
-def create_review(request, pk):
+    def dispatch(self, request, *args, **kwargs):
+        self.villa = get_object_or_404(Villa, pk=kwargs["pk"])
+        if Review.objects.filter(villa=self.villa, user=request.user).exists():
+            return redirect("villa-details", pk=self.villa.pk)
 
-    villa = get_object_or_404(Villa, pk=pk)
+        return super().dispatch(request, *args, **kwargs)
 
-    if request.method == "POST":
+    def form_valid(self, form):
+        review = form.save(commit=False)
+        review.user = self.request.user
+        review.villa = self.villa
+        review.save()
+        return super().form_valid(form)
 
-        form = ReviewForm(request.POST)
-
-        if form.is_valid():
-
-            review = form.save(commit=False)
-
-            review.villa = villa
-
-            review.save()
-
-            return redirect("villa-details", pk=villa.pk)
-
-    else:
-        form = ReviewForm()
-
-    context = {
-        "form": form,
-        "villa": villa,
-    }
-
-    return render(request, "reviews/review_create.html", context)
-
-# Create your views here.
+    def get_success_url(self):
+        return reverse_lazy("villa-details", kwargs={"pk": self.villa.pk})

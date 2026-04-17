@@ -3,9 +3,6 @@ from .models import Review
 
 
 class ReviewForm(forms.ModelForm):
-
     class Meta:
-
         model = Review
-
-        fields = ["guest_name", "rating", "comment"]
+        fields = ["rating", "comment"]

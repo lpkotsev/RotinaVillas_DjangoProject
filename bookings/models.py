@@ -1,6 +1,6 @@
 from django.db import models
 from villas.models import Villa
-
+from django.conf import settings
 
 class Booking(models.Model):
 
@@ -11,7 +11,10 @@ class Booking(models.Model):
     )
 
     guest_name = models.CharField(max_length=100)
-
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
     guest_email = models.EmailField()
 
     check_in = models.DateField()

@@ -1,5 +1,4 @@
 {% extends "shared/base.html" %}
-
 {% block content %}
 
 <div class="container mt-5">
@@ -7,14 +6,12 @@
 <h2>My Bookings</h2>
 
 <table class="table mt-4">
-
 <thead>
 <tr>
-<th>Villa</th>
-<th>Guest</th>
-<th>Check-in</th>
-<th>Check-out</th>
-<th>Actions</th>
+    <th>Villa</th>
+    <th>Check-in</th>
+    <th>Check-out</th>
+    <th>Actions</th>
 </tr>
 </thead>
 
@@ -23,29 +20,30 @@
 {% for booking in bookings %}
 
 <tr>
-<td>{{ booking.villa.name }}</td>
-<td>{{ booking.guest_name }}</td>
-<td>{{ booking.check_in }}</td>
-<td>{{ booking.check_out }}</td>
+    <td>{{ booking.villa.name }}</td>
+    <td>{{ booking.check_in }}</td>
+    <td>{{ booking.check_out }}</td>
 
-<td>
+    <td>
 
-<a href="{% url 'booking-edit' booking.pk %}" class="btn btn-warning btn-sm">
-✏
-</a>
+        {% if booking.can_review %}
+            <a href="{% url 'review-create' booking.villa.pk %}"
+               class="btn btn-primary btn-sm">
+               Leave Review
+            </a>
+        {% endif %}
 
-<a href="{% url 'booking-delete' booking.pk %}" class="btn btn-danger btn-sm">
-🗑
-</a>
+        <a href="{% url 'booking-delete' booking.pk %}"
+           class="btn btn-danger btn-sm">
+           🗑
+        </a>
 
-</td>
-
+    </td>
 </tr>
 
 {% endfor %}
 
 </tbody>
-
 </table>
 
 </div>

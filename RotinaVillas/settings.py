@@ -18,10 +18,13 @@ PROJECT_APPS = [
     'villas',
     'bookings',
     'reviews',
+    'accounts',
+    'api',
 ]
 
 
 INSTALLED_APPS = [
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +47,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'RotinaVillas.urls'
 
-
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ]
+}
 
 TEMPLATES = [
     {
@@ -75,11 +82,11 @@ WSGI_APPLICATION = 'RotinaVillas.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'rotinavillas_db',
+        'NAME': 'rotinavillas_db_advanced',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '5433',
     }
 }
 
@@ -103,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 LANGUAGE_CODE = 'en-us'
-
+LOGIN_REDIRECT_URL = '/'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -121,7 +128,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
-
+AUTH_USER_MODEL = 'accounts.AppUser'
 
 MEDIA_URL = '/media/'
 

@@ -1,77 +1,86 @@
 {% extends "shared/base.html" %}
-
+{% load static %}
 {% block content %}
 
-<h2>{{ villa.name }}</h2>
+<div class="container mt-5">
 
-<img src="{{ villa.image_url }}" class="img-fluid mb-3">
+    <div class="row align-items-start">
 
-<p>
-<strong>Location:</strong>
-{{ villa.location }}
-</p>
+        <!-- LEFT SIDE (DETAILS) -->
+        <div class="col-md-6">
 
-<p>
-<strong>Description:</strong>
-{{ villa.description }}
-</p>
+            <h2>{{ villa.name }}</h2>
 
-<p>Average Rating: {{ villa.average_rating }}</p>
+            <p>
+                <strong>Location:</strong>
+                {{ villa.location }}
+            </p>
 
-<p>
-<strong>Price:</strong>
-€{{ villa.price_per_night }} per night
-</p>
+            <p>
+                <strong>Description:</strong>
+                {{ villa.description }}
+            </p>
 
-<p>
-<strong>Capacity:</strong>
-{{ villa.capacity }} guests
-</p>
-<h4 class="mt-4">Amenities</h4>
+            <p><strong>Average Rating:</strong> {{ villa.average_rating }}</p>
 
-<div class="row">
+            <p>
+                <strong>Price:</strong>
+                €{{ villa.price_per_night }} per night
+            </p>
 
-{% for amenity in villa.amenities.all %}
+            <p>
+                <strong>Capacity:</strong>
+                {{ villa.capacity }} guests
+            </p>
 
-<div class="col-md-4 col-sm-6 mb-2">
-    ✓ {{ amenity.name }}
+            <h4 class="mt-4">Amenities</h4>
+
+            <div class="row">
+                {% for amenity in villa.amenities.all %}
+                <div class="col-md-6 col-sm-6 mb-2">
+                    ✓ {{ amenity.name }}
+                </div>
+                {% endfor %}
+            </div>
+
+            {% if user != villa.owner %}
+              <a href="{% url 'booking-create' villa.pk %}" class="btn btn-success mt-3">
+                 Book Now
+              </a>
+            {% endif %}
+
+        </div>
+
+        <!-- RIGHT SIDE (IMAGE) -->
+        <div class="col-md-6 text-center">
+
+            <img src="{% static 'images/'|add:villa.image_url %}"
+                 class="img-fluid rounded shadow"
+                 style="max-height: 400px; width: 100%; object-fit: cover;">
+
+        </div>
+
+    </div>
+
+    <!-- REVIEWS SECTION -->
+    <div class="mt-5">
+
+        <h3>Reviews</h3>
+
+        {% for review in villa.reviews.all %}
+        <div class="card mb-2">
+            <div class="card-body">
+                <strong>{{ review.user.username }}</strong>
+                <p>Rating: {{ review.rating }}/5</p>
+                <p>{{ review.comment }}</p>
+            </div>
+        </div>
+        {% empty %}
+        <p>No reviews yet.</p>
+        {% endfor %}
+
+    </div>
+
 </div>
-
-{% endfor %}
-
-</div>
-
-<a href="{% url 'booking-create' villa.pk %}"
-   class="btn btn-success">
-   Book Now
-</a>
-
-<a href="{% url 'review-create' villa.pk %}" class="btn btn-primary">
-Leave Review
-</a>
-
-<h3>Reviews</h3>
-
-{% for review in villa.reviews.all %}
-
-<div class="card mb-2">
-
-<div class="card-body">
-
-<strong>{{ review.guest_name }}</strong>
-
-<p>Rating: {{ review.rating }}/5</p>
-
-<p>{{ review.comment }}</p>
-
-</div>
-
-</div>
-
-{% empty %}
-
-<p>No reviews yet.</p>
-
-{% endfor %}
 
 {% endblock %}

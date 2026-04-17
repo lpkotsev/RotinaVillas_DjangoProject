@@ -1,44 +1,32 @@
 {% extends "shared/base.html" %}
-
 {% block content %}
 
 <div class="container mt-5">
 
-    <h2>Book {{ villa.name }}</h2>
+<h2>Book Villa</h2>
+{{ form.errors }}
+<form method="post">
+    {% csrf_token %}
 
-    <form method="post">
-        {% csrf_token %}
+    <div class="mb-3">
+        <label>Check-in</label>
+        {{ form.check_in }}
+    </div>
 
-        <div class="mb-3">
-            <label class="form-label">Guest Name</label>
-            {{ form.guest_name }}
-        </div>
+    <div class="mb-3">
+        <label>Check-out</label>
+        {{ form.check_out }}
+    </div>
 
-        <div class="mb-3">
-            <label class="form-label">Guest Email</label>
-            {{ form.guest_email }}
-        </div>
+    <div class="mb-3">
+        <label>Guests</label>
+        {{ form.guests }}
+    </div>
 
-        <div class="mb-3">
-            <label class="form-label">Check-in</label>
-            {{ form.check_in }}
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Check-out</label>
-            {{ form.check_out }}
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Guests</label>
-            {{ form.guests }}
-        </div>
-
-        <button type="submit" class="btn btn-primary">
-            Confirm Booking
-        </button>
-
-    </form>
+    <button type="submit" class="btn btn-success">
+        Book
+    </button>
+</form>
 
 </div>
 

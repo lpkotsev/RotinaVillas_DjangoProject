@@ -1,28 +1,31 @@
 from django import forms
 from .models import Booking
 
-
 class BookingForm(forms.ModelForm):
-    check_in = forms.DateField(
-        widget=forms.DateInput(attrs={"type": "date"})
-    )
-
-    check_out = forms.DateField(
-        widget=forms.DateInput(attrs={"type": "date"})
-    )
-
     class Meta:
         model = Booking
-        fields = [
-            "guest_name",
-            "guest_email",
-            "check_in",
-            "check_out",
-            "guests",
-        ]
+        fields = ['check_in', 'check_out', 'guests']
 
-    def clean(self):
-        cleaned_data = super().clean()
+        widgets = {
+            'check_in': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+            'check_out': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+            'guests': forms.NumberInput(attrs={
+                'class': 'form-control'
+            }),
+        }
+    def clean_guests(self):
+        guests = self.cleaned_data["guests"]
+
+        if guests <= 0:
+            raise forms.ValidationError("Guests must be at least 1.")
+
+        return guests
 
         check_in = cleaned_data.get("check_in")
         check_out = cleaned_data.get("check_out")
