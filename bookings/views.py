@@ -14,41 +14,44 @@ from datetime import date
 
 class BookingCreateView(LoginRequiredMixin, CreateView):
     model = Booking
-    template_name = 'bookings/booking-create.html'
-    success_url = reverse_lazy('booking-list')
     form_class = BookingForm
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        form.instance.villa_id = self.kwargs['pk']
-        return super().form_valid(form)
+    template_name = 'bookings/booking-create.html'
 
     def dispatch(self, request, *args, **kwargs):
         self.villa = get_object_or_404(Villa, id=self.kwargs["pk"])
         return super().dispatch(request, *args, **kwargs)
 
+    def form_valid(self, form):
+        check_in = form.cleaned_data.get("check_in")
+        check_out = form.cleaned_data.get("check_out")
 
 
-        existing_bookings = Booking.objects.filter(
+        overlapping_bookings = Booking.objects.filter(
             villa=self.villa,
             check_in__lt=check_out,
-            check_out__gt=check_in
+            check_out__gt=check_in,
         )
 
-        if existing_bookings.exists():
+        if overlapping_bookings.exists():
             form.add_error(None, "This villa is already booked for those dates.")
             return self.form_invalid(form)
 
+
         booking = form.save(commit=False)
-        booking.villa = self.villa
         booking.user = self.request.user
+        booking.villa = self.villa
         booking.save()
 
+
+        send_booking_confirmation_async(booking.id)
+
+
         messages.success(self.request, "Booking confirmed!")
+
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy("villa-list")
+        return reverse_lazy("my-bookings")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
