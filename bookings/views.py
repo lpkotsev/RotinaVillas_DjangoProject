@@ -11,6 +11,7 @@ from .tasks import send_booking_confirmation_async
 from django.contrib.auth import login
 from reviews.models import Review
 from datetime import date
+from common.mixins import IsObjectOwnerMixin
 
 class BookingCreateView(LoginRequiredMixin, CreateView):
     model = Booking
@@ -88,14 +89,34 @@ class BookingListView(ListView):
         return context
 
 
-class BookingEditView(UpdateView):
+class BookingEditView(LoginRequiredMixin, IsObjectOwnerMixin, UpdateView):
     model = Booking
     form_class = BookingForm
-    template_name = "bookings/booking-edit.html"
-    success_url = reverse_lazy("my-bookings")
+    template_name = 'bookings/booking-edit.html'
+
+    def form_valid(self, form):
+        check_in = form.cleaned_data.get("check_in")
+        check_out = form.cleaned_data.get("check_out")
 
 
-class BookingDeleteView(DeleteView):
+        overlapping = Booking.objects.filter(
+            villa=self.object.villa,
+            check_in__lt=check_out,
+            check_out__gt=check_in,
+        ).exclude(pk=self.object.pk)
+
+        if overlapping.exists():
+            form.add_error(None, "This villa is already booked for those dates.")
+            return self.form_invalid(form)
+
+        messages.success(self.request, "Booking updated successfully!")
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("my-bookings")
+
+
+class BookingDeleteView(LoginRequiredMixin, IsObjectOwnerMixin, DeleteView):
     model = Booking
     template_name = "bookings/booking-delete.html"
     success_url = reverse_lazy("my-bookings")

@@ -6,6 +6,7 @@ from .forms import VillaCreateForm, VillaEditForm
 from django.views import View
 from django.shortcuts import render, redirect
 from .forms import VillaCreateForm
+from common.mixins import IsObjectOwnerMixin
 
 class VillaListView(ListView):
 
@@ -36,7 +37,7 @@ class VillaCreateView(LoginRequiredMixin, CreateView):
 
 
 
-class VillaEditView(UpdateView):
+class VillaEditView(LoginRequiredMixin, IsObjectOwnerMixin, UpdateView):
 
     model = Villa
 
@@ -47,7 +48,7 @@ class VillaEditView(UpdateView):
     success_url = reverse_lazy("villa-list")
 
 
-class VillaDeleteView(DeleteView):
+class VillaDeleteView(LoginRequiredMixin, IsObjectOwnerMixin, DeleteView):
 
     model = Villa
     template_name = "villas/villa-delete.html"

@@ -33,10 +33,16 @@
             </a>
         {% endif %}
 
-        <a href="{% url 'booking-delete' booking.pk %}"
-           class="btn btn-danger btn-sm">
-           🗑
-        </a>
+        {% if booking.user == request.user %}
+             <a href="{% url 'booking-edit' booking.pk %}"
+                  class="btn btn-warning btn-sm">
+                  Edit
+             </a>
+             <a href="{% url 'booking-delete' booking.pk %}"
+                  class="btn btn-danger btn-sm">
+                  Delete
+             </a>
+         {% endif %}
 
     </td>
 </tr>
