@@ -5,8 +5,10 @@ from .models import Villa
 from .forms import VillaCreateForm, VillaEditForm
 from django.views import View
 from django.shortcuts import render, redirect
-from .forms import VillaCreateForm
+from .forms import VillaSearchForm
+from .forms import VillaFilterForm
 from common.mixins import IsObjectOwnerMixin
+from django.db.models import Q, F
 
 class VillaListView(ListView):
 
@@ -16,6 +18,62 @@ class VillaListView(ListView):
 
     context_object_name = "villas"
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        self.search_form = VillaSearchForm(self.request.GET)
+        self.filter_form = VillaFilterForm(self.request.GET)
+
+        # 🔍 SEARCH
+        if self.search_form.is_valid():
+            query = self.search_form.cleaned_data.get("query")
+
+            if query:
+                queryset = queryset.filter(
+                    Q(name__icontains=query) |
+                    Q(location__icontains=query)
+                )
+
+
+        if self.filter_form.is_valid():
+
+            min_price = self.filter_form.cleaned_data.get("min_price")
+            max_price = self.filter_form.cleaned_data.get("max_price")
+            guests = self.filter_form.cleaned_data.get("guests")
+            ordering = self.filter_form.cleaned_data.get("ordering")
+
+
+            if min_price:
+                queryset = queryset.filter(price_per_night__gte=min_price)
+
+            if max_price:
+                queryset = queryset.filter(price_per_night__lte=max_price)
+
+
+            if guests:
+                queryset = queryset.filter(capacity__gte=guests)
+
+            check_in = self.filter_form.cleaned_data.get("check_in")
+            check_out = self.filter_form.cleaned_data.get("check_out")
+
+            if check_in and check_out:
+                queryset = queryset.exclude(
+                    bookings__check_in__lt=check_out,
+                    bookings__check_out__gt=check_in
+                )
+
+
+            if ordering:
+                queryset = queryset.order_by(ordering)
+
+        return queryset
+
+
+    def get_context_data(self, **kwargs):
+       context = super().get_context_data(**kwargs)
+       context["search_form"] = self.search_form
+       context["filter_form"] = self.filter_form
+       return context
 
 class VillaDetailView(DetailView):
 

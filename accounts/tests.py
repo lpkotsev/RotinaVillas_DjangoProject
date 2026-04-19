@@ -7,12 +7,13 @@ User = get_user_model()
 class AuthTest(TestCase):
 
     def test_register_user(self):
-        response = self.client.post(reverse("register"), {
-            "username": "newuser",
-            "password1": "StrongPass123",
-            "password2": "StrongPass123",
+        response = self.client.post("/accounts/register/", {
+            "username": "test",
+            "email": "test@test.com",
+            "password": "12345test",
+            "confirm_password": "12345test",
         })
-        self.assertEqual(response.status_code, 302)
+        self.assertTrue(User.objects.filter(username="test").exists())
 
     def test_login_user(self):
         User.objects.create_user(username="user", password="123456")

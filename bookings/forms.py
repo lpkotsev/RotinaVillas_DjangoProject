@@ -47,3 +47,4 @@ class BookingForm(forms.ModelForm):
 
         return cleaned_data
 
+

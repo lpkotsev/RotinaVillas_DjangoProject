@@ -1,51 +1,107 @@
 {% extends "shared/base.html" %}
 {% load static %}
-{% block content %}
 {% load villa_extras %}
+
+{% block content %}
+
+<div class="container mt-4">
 
 <h2>Available Villas</h2>
 
 <div class="row">
 
-{% for villa in villas %}
+    <!-- 🎛️ FILTER SIDEBAR -->
+    <div class="col-md-3">
 
-<div class="col-md-4">
+        <form method="get">
 
-<div class="card villa-card mb-4 shadow-sm">
+            <!-- 🔍 Search -->
+            <h5>Search</h5>
+            {{ search_form.query }}
 
-<img src="{% static 'images/'|add:villa.image_url %}"
-     class="card-img-top villa-img"
-     alt="{{ villa.name }}">
+            <hr>
 
-<div class="card-body">
+            <h5>Dates</h5>
 
-<h5 class="card-title">
-{{ villa.name }}
-</h5>
+            <label>Check-in</label>
+            {{ filter_form.check_in }}
 
-<p>
-{{ villa.location }}
-</p>
+            <label>Check-out</label>
+            {{ filter_form.check_out }}
+            <h5>Price Range</h5>
+            <label>Min</label>
+            {{ filter_form.min_price }}
 
-<p>
-€{{ villa.price_per_night }} per night
-</p>
+            <label>Max</label>
+            {{ filter_form.max_price }}
 
-<a href="{% url 'villa-details' villa.pk %}" class="btn btn-primary">
-View Details
-</a>
+            <hr>
+
+            <!-- 👥 Guests -->
+            <h5>Guests</h5>
+            {{ filter_form.guests }}
+
+            <hr>
+
+            <!-- ↕️ Sorting -->
+            <h5>Sort</h5>
+            {{ filter_form.ordering }}
+
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary w-100">
+                    Apply
+                </button>
+
+                <a href="{% url 'villa-list' %}" class="btn btn-secondary w-100 mt-2">
+                    Reset
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- 🏡 VILLAS -->
+    <div class="col-md-9">
+
+        <div class="row">
+
+        {% for villa in villas %}
+
+            <div class="col-md-6">
+
+                <div class="card villa-card mb-4 shadow-sm">
+
+                    <img src="{% static 'images/'|add:villa.image_url %}"
+                         class="card-img-top villa-img"
+                         alt="{{ villa.name }}">
+
+                    <div class="card-body">
+
+                        <h5>{{ villa.name }}</h5>
+                        <p>{{ villa.location }}</p>
+                        <p>€{{ villa.price_per_night }} per night</p>
+
+                        <a href="{% url 'villa-details' villa.pk %}"
+                           class="btn btn-primary">
+                           View Details
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% empty %}
+            <p>No villas found matching your criteria.</p>
+        {% endfor %}
+
+        </div>
+
+    </div>
 
 </div>
-
-</div>
-
-</div>
-
-{% empty %}
-
-<p>No villas available yet.</p>
-
-{% endfor %}
 
 </div>
 
