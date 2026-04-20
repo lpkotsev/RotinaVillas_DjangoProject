@@ -5,50 +5,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bca539f6-6cfc-462c-9799-e45d02888028" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/media/villas/default-villa.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/default-villa.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/500.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RotinaVillas/celery.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/permissions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RotinaVillas/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/RotinaVillas/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RotinaVillas/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/RotinaVillas/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RotinaVillas/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/RotinaVillas/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/apps.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/signals.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookings/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookings/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookings/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookings/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookings/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookings/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookings/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookings/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookings/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/amalfi.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/amalfi.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/bali.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/bali.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/california.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/california.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/cape-town.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/cape-town.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/como.png" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/como.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/costa-rica.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/costa-rica.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/dubai.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/dubai.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/ibiza.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/ibiza.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/malibu.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/malibu.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/mykonos.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/mykonos.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/nice.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/nice.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/phuket.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/phuket.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/santorini.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/santorini.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/tuscany.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/tuscany.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/villa1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/villa1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/villa2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/villa2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/villa3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/villa3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/zermatt.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/zermatt.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/accounts/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounts/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bookings/booking-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bookings/booking-edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/mixins.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/mixins.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/villas/villa1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/villa1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/villas/villa2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/villa2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/villas/villa3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/villa3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reviews/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/reviews/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reviews/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/reviews/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reviews/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/reviews/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reviews/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/reviews/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bookings/booking-create.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bookings/booking-create.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/bookings/booking-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bookings/booking-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bookings/booking-success.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bookings/booking-success.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/common/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/common/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/common/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/common/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/shared/nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/shared/nav.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/villas/my-villas.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/villas/my-villas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/villas/villa-create.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/villas/villa-create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/villas/villa-delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/villas/villa-delete.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/villas/villa-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/villas/villa-details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/villas/villa-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/villas/villa-edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/villas/villa-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/villas/villa-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/villas/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/villas/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/villas/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/villas/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/villas/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/villas/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/villas/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/villas/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/villas/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/villas/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,6 +99,7 @@
       <recent name="$PROJECT_DIR$/static/images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/images" />
       <recent name="$PROJECT_DIR$/media/villas" />
       <recent name="$PROJECT_DIR$/templates/accounts" />
       <recent name="$PROJECT_DIR$/templates/shared" />
@@ -160,7 +156,7 @@
       <workItem from="1774633723367" duration="1429000" />
       <workItem from="1776241289527" duration="3073000" />
       <workItem from="1776269099246" duration="35751000" />
-      <workItem from="1776547315994" duration="30398000" />
+      <workItem from="1776547315994" duration="59392000" />
     </task>
     <servers />
   </component>
@@ -172,13 +168,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/villas/views.py</url>
-          <line>138</line>
+          <line>118</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/bookings/views.py</url>
-          <line>6</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/reviews/forms.py</url>
+          <line>4</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

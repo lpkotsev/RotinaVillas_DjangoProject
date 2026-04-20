@@ -52,7 +52,7 @@
                     Apply
                 </button>
 
-                <a href="{% url 'villa-list' %}" class="btn btn-secondary w-100 mt-2">
+                <a href="{% url 'villa-list-page' %}" class="btn btn-secondary w-100 mt-2">
                     Reset
                 </a>
             </div>
@@ -73,23 +73,17 @@
                 <div class="card villa-card mb-4 shadow-sm">
 
                     {% if villa.image %}
-                       <img src="{{ villa.image.url }}"
-                            class="card-img-top"
-                            alt="{{ villa.name }}">
+                       <img src="{{ villa.image.url }}" class="card-img-top">
                     {% else %}
-                       <img src="{% static 'images/default-villa.jpg' %}"
-                            class="card-img-top"
-                            alt="No image available">
+                       <img src="{% static 'images/default-villa.jpg' %}" class="card-img-top">
                     {% endif %}
 
                     <div class="card-body">
-
                         <h5>{{ villa.name }}</h5>
                         <p>{{ villa.location }}</p>
                         <p>€{{ villa.price_per_night }} per night</p>
 
-                        <a href="{% url 'villa-details' villa.pk %}"
-                           class="btn btn-primary">
+                        <a href="{% url 'villa-details-page' villa.pk %}" class="btn btn-primary">
                            View Details
                         </a>
 

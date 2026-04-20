@@ -1,15 +1,11 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
+from common.mixins import IsOwnerOrModeratorMixin
 from .models import Villa
-from .forms import VillaCreateForm, VillaEditForm
-from django.views import View
-from django.shortcuts import render, redirect
-from .forms import VillaSearchForm
-from .forms import VillaFilterForm
-from common.mixins import IsObjectOwnerMixin
-from django.db.models import Q, F
-from .models import Amenity
+from .forms import VillaCreateForm, VillaEditForm, VillaSearchForm, VillaFilterForm
 
 
 
@@ -28,7 +24,7 @@ class VillaListView(ListView):
         self.search_form = VillaSearchForm(self.request.GET)
         self.filter_form = VillaFilterForm(self.request.GET)
 
-        # 🔍 SEARCH
+
         if self.search_form.is_valid():
             query = self.search_form.cleaned_data.get("query")
 
@@ -90,7 +86,7 @@ class VillaCreateView(LoginRequiredMixin, CreateView):
      model = Villa
      form_class = VillaCreateForm
      template_name = 'villas/villa-create.html'
-     success_url = reverse_lazy('villa-list')
+     success_url = reverse_lazy('villa-list-page')
 
      def form_valid(self, form):
         form.instance.owner = self.request.user
@@ -99,7 +95,7 @@ class VillaCreateView(LoginRequiredMixin, CreateView):
 
 
 
-class VillaEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class VillaEditView(LoginRequiredMixin, IsOwnerOrModeratorMixin, UpdateView):
 
     model = Villa
 
@@ -107,36 +103,20 @@ class VillaEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     template_name = "villas/villa-edit.html"
 
-    success_url = reverse_lazy("villa-list")
-
-    def test_func(self):
-        villa = self.get_object()
-        user = self.request.user
-
-        return (
-                user.is_superuser or
-                user.groups.filter(name="Moderators").exists() or
-                villa.owner == user
-        )
+    success_url = reverse_lazy("villa-list-page")
 
 
-class VillaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+
+
+class VillaDeleteView(LoginRequiredMixin, IsOwnerOrModeratorMixin, DeleteView):
 
     model = Villa
     template_name = "villas/villa-delete.html"
-    success_url = reverse_lazy("villa-list")
+    success_url = reverse_lazy("villa-list-page")
 
-    def test_func(self):
-        villa = self.get_object()
-        user = self.request.user
 
-        return (
-                user.is_superuser or
-                user.groups.filter(name="Moderators").exists() or
-                villa.owner == user
-        )
 
-class MyVillasView(ListView):
+class MyVillasView(ListView, LoginRequiredMixin):
     model = Villa
     template_name = "villas/my-villas.html"
     context_object_name = "villas"
@@ -148,5 +128,7 @@ class MyVillasView(ListView):
             return Villa.objects.all()
 
         return Villa.objects.filter(owner=user)
+
+
 
 # Create your views here.

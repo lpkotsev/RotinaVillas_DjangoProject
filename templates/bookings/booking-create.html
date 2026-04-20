@@ -4,30 +4,34 @@
 <div class="container mt-5">
 
 <h2>Book Villa</h2>
-{{ form.errors }}
+
 <form method="post">
     {% csrf_token %}
 
-    <div class="mb-3">
-        <label>Check-in</label>
-        {{ form.check_in }}
+    <div class="row">
+
+        <div class="col-md-4">
+            <label>Check-in</label>
+            {{ form.check_in }}
+        </div>
+
+        <div class="col-md-4">
+            <label>Check-out</label>
+            {{ form.check_out }}
+        </div>
+
+        <div class="col-md-4">
+            <label>Guests</label>
+            {{ form.guests }}
+        </div>
+
     </div>
 
-    <div class="mb-3">
-        <label>Check-out</label>
-        {{ form.check_out }}
-    </div>
-
-    <div class="mb-3">
-        <label>Guests</label>
-        {{ form.guests }}
-    </div>
-
-    <button type="submit" class="btn btn-success">
+    <button type="submit" class="btn btn-success mt-3">
         Book
     </button>
-</form>
 
+</form>
 </div>
 
 {% endblock %}

@@ -6,7 +6,7 @@
 
     <div class="row align-items-start">
 
-        <!-- LEFT SIDE (DETAILS) -->
+
         <div class="col-md-6">
 
             <h2>{{ villa.name }}</h2>
@@ -21,7 +21,11 @@
                 {{ villa.description }}
             </p>
 
-            <p><strong>Average Rating:</strong> {{ villa.average_rating }}</p>
+            {% if villa.average_rating %}
+               <p><strong>Average Rating:</strong> {{ villa.average_rating|floatformat:1 }}</p>
+            {% else %}
+               <p><strong>Average Rating:</strong> No reviews given</p>
+            {% endif %}
 
             <p>
                 <strong>Price:</strong>
@@ -49,24 +53,32 @@
               </a>
             {% endif %}
 
+            {% if request.user == villa.owner or request.user.is_superuser %}
+              <a href="{% url 'villa-edit' villa.pk %}" class="btn btn-warning mt-2">
+                 Edit
+              </a>
+            {% endif %}
+
         </div>
 
-        <!-- RIGHT SIDE (IMAGE) -->
+
         <div class="col-md-6 text-center">
 
                {% if villa.image %}
-                  <img src="{{ villa.image.url }}" class="villa-img">
+                   <img src="{{ villa.image.url }}"
+                      class="img-fluid rounded shadow"
+                      style="max-height: 400px; width: 100%; object-fit: cover;">
                {% else %}
-                   <img src="{% static 'images/default-villa.jpg' %}" class="villa-img">
+                     <img src="{% static 'images/default-villa.jpg' %}"
+                        class="img-fluid rounded shadow"
+                        style="max-height: 400px; width: 100%; object-fit: cover;">
                {% endif %}
-                 class="img-fluid rounded shadow"
-                 style="max-height: 400px; width: 100%; object-fit: cover;">
 
         </div>
 
     </div>
 
-    <!-- REVIEWS SECTION -->
+
     <div class="mt-5">
 
         <h3>Reviews</h3>

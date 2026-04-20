@@ -1,7 +1,10 @@
 from django.urls import path
-from .views import VillaListCreateAPI, BookingListAPI
+from rest_framework.routers import DefaultRouter
+from .views import VillaViewSet, BookingViewSet
 
-urlpatterns = [
-    path("villas/", VillaListCreateAPI.as_view(), name="api-villas"),
-    path("bookings/", BookingListAPI.as_view(), name="api-bookings"),
-]
+router = DefaultRouter()
+router.register("villas", VillaViewSet, basename="villa")
+router.register("bookings", BookingViewSet, basename="booking")
+
+urlpatterns = router.urls
+

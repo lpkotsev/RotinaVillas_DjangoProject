@@ -1,36 +1,46 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from django_filters.rest_framework import DjangoFilterBackend
+from .permissions import IsOwnerOrModerator
+
 from villas.models import Villa
-from .serializers import VillaSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from rest_framework.permissions import IsAuthenticated
 from bookings.models import Booking
-from .serializers import BookingSerializer
 
-class VillaListCreateAPI(APIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
-
-    def get(self, request):
-        villas = Villa.objects.all()
-        serializer = VillaSerializer(villas, many=True)
-        return Response(serializer.data)
-
-    def post(self, request):
-        serializer = VillaSerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save(owner=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+from .serializers import VillaSerializer, BookingSerializer
+from .permissions import IsOwnerOrModerator
 
 
-class BookingListAPI(APIView):
-    permission_classes = [IsAuthenticated]
+class VillaViewSet(viewsets.ModelViewSet):
+    queryset = Villa.objects.all()
+    serializer_class = VillaSerializer
 
-    def get(self, request):
-        bookings = Booking.objects.filter(user=request.user)
-        serializer = BookingSerializer(bookings, many=True)
-        return Response(serializer.data)
-# Create your views here.
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["location", "villa_type", "price_per_night"]
+
+    def get_permissions(self):
+        if self.action in ["update", "partial_update", "destroy"]:
+            return [IsAuthenticated(), IsOwnerOrModerator()]
+        return [IsAuthenticatedOrReadOnly()]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class BookingViewSet(viewsets.ModelViewSet):
+    serializer_class = BookingSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.is_superuser or user.groups.filter(name="Moderators").exists():
+            return Booking.objects.all()
+
+        return Booking.objects.filter(user=user)
+
+    def get_permissions(self):
+        if self.action in ["update", "partial_update", "destroy"]:
+            return [IsAuthenticated(), IsOwnerOrModerator()]
+        return [IsAuthenticated()]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

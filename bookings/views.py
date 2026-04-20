@@ -1,25 +1,33 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from villas.models import Villa
-from .forms import BookingForm
-from .models import Booking
-from django.views.generic import ListView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-from django.views.generic import CreateView
-from .tasks import send_booking_confirmation_async
-from django.contrib.auth import login
-from reviews.models import Review
 from datetime import date
-from common.mixins import IsObjectOwnerMixin
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import redirect
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic import ListView, UpdateView, DeleteView, CreateView
+
+from villas.models import Villa
+from reviews.models import Review
+from common.mixins import IsOwnerOrModeratorMixin
 from .models import Booking
-from .forms import BookingEditForm
+from .forms import BookingForm, BookingEditForm
+from .tasks import send_booking_confirmation_async
 
 
 class BookingCreateView(LoginRequiredMixin, CreateView):
     model = Booking
     form_class = BookingForm
-    template_name = 'bookings/booking-create.html'
+    template_name = "bookings/booking-create.html"
+    def form_valid(self, form):
+        response = super().form_valid(form)
+
+
+        send_booking_confirmation_async.delay(
+            self.request.user.email,
+            self.object.villa.name
+        )
+
+        return response
 
     def dispatch(self, request, *args, **kwargs):
         self.villa = get_object_or_404(Villa, id=self.kwargs["pk"])
@@ -30,41 +38,35 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
         check_out = form.cleaned_data.get("check_out")
 
 
-        overlapping_bookings = Booking.objects.filter(
-            villa=self.villa,
-            check_in__lt=check_out,
-            check_out__gt=check_in,
-        )
-
-        if overlapping_bookings.exists():
-            form.add_error(None, "This villa is already booked for those dates.")
-            return self.form_invalid(form)
-
-
         booking = form.save(commit=False)
         booking.user = self.request.user
         booking.villa = self.villa
         booking.save()
 
-
-        send_booking_confirmation_async(booking.id)
-
+        send_booking_confirmation_async.delay(
+            self.request.user.email,
+            self.villa.name
+        )
 
         messages.success(self.request, "Booking confirmed!")
-
-        return super().form_valid(form)
+        return redirect("my-bookings")
 
     def get_success_url(self):
-        return reverse_lazy("my-bookings")
+        return reverse_lazy("booking-success")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["villa"] = self.villa
         return context
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["villa"] = self.villa
+        return kwargs
 
 
-class BookingListView(ListView):
+
+class BookingListView(ListView, LoginRequiredMixin):
     model = Booking
     template_name = "bookings/booking-list.html"
 
@@ -80,50 +82,30 @@ class BookingListView(ListView):
         context = super().get_context_data(**kwargs)
 
         today = date.today()
-        context["today"] = today
+        user = self.request.user
+
+        context["is_moderator"] = user.groups.filter(name="Moderators").exists()
 
         bookings_with_flags = []
 
         for booking in context["object_list"]:
-            has_review = Review.objects.filter(
-                user=self.request.user,
-                villa=booking.villa
-            ).exists()
-
-            booking.can_review = booking.check_out < today and not has_review
+            booking.can_review = booking.check_out < today
             bookings_with_flags.append(booking)
 
-        context["bookings"] = bookings_with_flags
+        context["object_list"] = bookings_with_flags
+
         return context
 
 
-class BookingEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class BookingEditView(LoginRequiredMixin, IsOwnerOrModeratorMixin, UpdateView):
     model = Booking
     form_class = BookingEditForm
     template_name = "bookings/booking-edit.html"
     success_url = reverse_lazy("my-bookings")
 
-    def test_func(self):
-        booking = self.get_object()
-        user = self.request.user
 
-        return (
-                user.is_superuser or
-                user.groups.filter(name="Moderators").exists() or
-                booking.user == user
-        )
 
-class BookingDeleteView(LoginRequiredMixin, IsObjectOwnerMixin, DeleteView):
+class BookingDeleteView(LoginRequiredMixin, IsOwnerOrModeratorMixin, DeleteView):
     model = Booking
     template_name = "bookings/booking-delete.html"
     success_url = reverse_lazy("my-bookings")
-
-    def test_func(self):
-        booking = self.get_object()
-        user = self.request.user
-
-        return (
-                user.is_superuser or
-                user.groups.filter(name="Moderators").exists() or
-                booking.user == user
-        )

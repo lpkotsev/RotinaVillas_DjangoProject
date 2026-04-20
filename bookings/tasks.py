@@ -1,17 +1,27 @@
-import threading
-import time
+from celery import shared_task
+from django.core.mail import send_mail
+from django.utils.timezone import now
+from datetime import timedelta
+from .models import Booking
 
 
-def send_booking_confirmation(booking_id):
-    # simulate heavy work
-    time.sleep(2)
-
-    print(f"Booking {booking_id} confirmed (async task)")
-
-
-def send_booking_confirmation_async(booking_id):
-    thread = threading.Thread(
-        target=send_booking_confirmation,
-        args=(booking_id,)
+@shared_task
+def send_booking_confirmation_async(email, villa_name):
+    send_mail(
+        subject="Booking Confirmed",
+        message=f"You successfully booked {villa_name}.",
+        from_email="no-reply@rotinavillas.com",
+        recipient_list=[email],
+        fail_silently=True,
     )
-    thread.start()
+
+
+@shared_task
+def delete_old_bookings():
+    five_years_ago = now() - timedelta(days=5 * 365)
+
+    deleted_count, _ = Booking.objects.filter(
+        check_out__lt=five_years_ago
+    ).delete()
+
+    print(f"Deleted {deleted_count} old bookings")

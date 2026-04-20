@@ -49,7 +49,7 @@ class VillaViewsTest(TestCase):
         )
 
     def test_villa_list_view(self):
-        response = self.client.get(reverse("villa-list"))
+        response = self.client.get(reverse("villa-list-page"))
         self.assertEqual(response.status_code, 200)
 
     def test_villa_create_requires_login(self):
@@ -64,9 +64,9 @@ class VillaViewsTest(TestCase):
 
     def test_villa_list_empty(self):
         Villa.objects.all().delete()
-        response = self.client.get(reverse("villa-list"))
+        response = self.client.get(reverse("villa-list-page"))
         self.assertEqual(response.status_code, 200)
 
     def test_villa_detail_view(self):
-        response = self.client.get(reverse("villa-details", args=[self.villa.id]))
+        response = self.client.get(reverse("villa-details-page", args=[self.villa.id]))
         self.assertEqual(response.status_code, 200)

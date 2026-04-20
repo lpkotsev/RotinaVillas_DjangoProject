@@ -1,12 +1,15 @@
 from django import forms
 from datetime import date
+from django.conf import settings
 from .models import Booking
+
 
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
         fields = ['check_in', 'check_out', 'guests']
 
+
         widgets = {
             'check_in': forms.DateInput(attrs={
                 'type': 'date',
@@ -17,17 +20,14 @@ class BookingForm(forms.ModelForm):
                 'class': 'form-control'
             }),
             'guests': forms.NumberInput(attrs={
-                'class': 'form-control'
+                'class': 'form-control',
+                'min': 1
             }),
         }
 
-    def clean_guests(self):
-        guests = self.cleaned_data.get("guests")
-
-        if guests is not None and guests <= 0:
-            raise forms.ValidationError("Guests must be at least 1.")
-
-        return guests
+    def __init__(self, *args, **kwargs):
+        self.villa = kwargs.pop("villa", None)
+        super().__init__(*args, **kwargs)
 
     def clean(self):
         cleaned_data = super().clean()
@@ -36,44 +36,38 @@ class BookingForm(forms.ModelForm):
         check_out = cleaned_data.get("check_out")
 
         if check_in and check_out:
+
+
             if check_out <= check_in:
                 raise forms.ValidationError(
-                    "Check-out date must be after check-in date."
-                )
-            if check_in < date.today():
-                raise forms.ValidationError(
-                    "Check-in date cannot be in the past."
+                    "Check-out must be after check-in."
                 )
 
+
+            if not settings.DEBUG:
+                if check_in < date.today():
+                    raise forms.ValidationError(
+                        "Check-in cannot be in the past."
+                    )
+
+
+            if self.villa:
+                overlapping = Booking.objects.filter(
+                    villa=self.villa,
+                    check_in__lt=check_out,
+                    check_out__gt=check_in,
+                )
+
+                if overlapping.exists():
+                    raise forms.ValidationError(
+                        "This villa is already booked for those dates."
+                    )
+
         return cleaned_data
+
 
 
 class BookingEditForm(forms.ModelForm):
     class Meta:
         model = Booking
         fields = ['check_in', 'check_out', 'guests']
-
-        widgets = {
-            'check_in': forms.DateInput(attrs={
-                'type': 'date',
-                'class': 'form-control'
-            }),
-            'check_out': forms.DateInput(attrs={
-                'type': 'date',
-                'class': 'form-control'
-            }),
-            'guests': forms.NumberInput(attrs={
-                'class': 'form-control'
-            }),
-        }
-
-    def clean(self):
-        cleaned_data = super().clean()
-        check_in = cleaned_data.get("check_in")
-        check_out = cleaned_data.get("check_out")
-
-        if check_in and check_out:
-            if check_out <= check_in:
-                raise forms.ValidationError("Check-out must be after check-in.")
-
-        return cleaned_data

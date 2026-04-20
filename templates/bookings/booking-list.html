@@ -17,7 +17,7 @@
 
 <tbody>
 
-{% for booking in bookings %}
+{% for booking in object_list %}
 
 <tr>
     <td>{{ booking.villa.name }}</td>
@@ -33,7 +33,7 @@
             </a>
         {% endif %}
 
-        {% if booking.user == request.user %}
+        {% if request.user == booking.user or is_moderator or request.user.is_superuser %}
              <a href="{% url 'booking-edit' booking.pk %}"
                   class="btn btn-warning btn-sm">
                   Edit

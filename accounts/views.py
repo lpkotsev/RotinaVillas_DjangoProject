@@ -1,18 +1,13 @@
-from django.views.generic import CreateView
+from django.contrib.auth import get_user_model, login
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.contrib.auth import get_user_model
-from .forms import RegisterForm
-from django.views import View
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
-from django.contrib.auth.views import LoginView
-from .forms import CustomLoginForm
-from .models import Profile
-from .forms import ProfileForm
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views import View
 from django.views.generic import UpdateView, DetailView
-
+from django.contrib.auth.models import Group
+from .forms import RegisterForm, CustomLoginForm, ProfileForm
+from .models import Profile
 
 User = get_user_model()
 
@@ -30,12 +25,14 @@ class RegisterView(View):
             user = form.save(commit=False)
             user.set_password(form.cleaned_data["password"])
 
-
             user.is_owner = False
             user.save()
 
+            group, _ = Group.objects.get_or_create(name="Users")
+            user.groups.add(group)
+
             login(request, user)
-            return redirect("villa-list")
+            return redirect("villa-list-page")
 
         return render(request, "accounts/register.html", {"form": form})
 

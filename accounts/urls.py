@@ -8,5 +8,4 @@ urlpatterns = [
     path("logout/", UserLogoutView.as_view(), name="logout"),
 
     path("profile/", ProfileUpdateView.as_view(), name="profile"),
-    path("profile/<int:pk>/edit/", ProfileUpdateView.as_view(), name="profile-edit"),
 ]
