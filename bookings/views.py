@@ -18,16 +18,6 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
     model = Booking
     form_class = BookingForm
     template_name = "bookings/booking-create.html"
-    def form_valid(self, form):
-        response = super().form_valid(form)
-
-
-        send_booking_confirmation_async.delay(
-            self.request.user.email,
-            self.object.villa.name
-        )
-
-        return response
 
     def dispatch(self, request, *args, **kwargs):
         self.villa = get_object_or_404(Villa, id=self.kwargs["pk"])
@@ -66,7 +56,7 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 
 
 
-class BookingListView(ListView, LoginRequiredMixin):
+class BookingListView(LoginRequiredMixin, ListView):
     model = Booking
     template_name = "bookings/booking-list.html"
 

@@ -116,7 +116,7 @@ class VillaDeleteView(LoginRequiredMixin, IsOwnerOrModeratorMixin, DeleteView):
 
 
 
-class MyVillasView(ListView, LoginRequiredMixin):
+class MyVillasView(LoginRequiredMixin, ListView):
     model = Villa
     template_name = "villas/my-villas.html"
     context_object_name = "villas"

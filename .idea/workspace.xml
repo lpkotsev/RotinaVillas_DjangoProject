@@ -5,45 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bca539f6-6cfc-462c-9799-e45d02888028" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/RotinaVillas/celery.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/permissions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RotinaVillas/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/RotinaVillas/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RotinaVillas/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/RotinaVillas/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RotinaVillas/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/RotinaVillas/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookings/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookings/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookings/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookings/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookings/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookings/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookings/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookings/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookings/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/mixins.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/mixins.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/villas/villa1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/villa1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/villas/villa2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/villa2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/villas/villa3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/villa3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reviews/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/reviews/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reviews/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/reviews/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reviews/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/reviews/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reviews/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/reviews/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bookings/booking-create.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bookings/booking-create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bookings/booking-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bookings/booking-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bookings/booking-success.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bookings/booking-success.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/common/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/common/about.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/common/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/common/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/shared/nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/shared/nav.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/villas/my-villas.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/villas/my-villas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/villas/villa-delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/villas/villa-delete.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/villas/villa-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/villas/villa-details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/villas/villa-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/villas/villa-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/villas/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/villas/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/villas/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/villas/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_dump.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project_dump.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/villas/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/villas/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -156,7 +123,7 @@
       <workItem from="1774633723367" duration="1429000" />
       <workItem from="1776241289527" duration="3073000" />
       <workItem from="1776269099246" duration="35751000" />
-      <workItem from="1776547315994" duration="59392000" />
+      <workItem from="1776547315994" duration="63303000" />
     </task>
     <servers />
   </component>

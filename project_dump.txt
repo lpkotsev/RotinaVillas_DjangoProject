@@ -528,7 +528,7 @@ class VillaDeleteView(LoginRequiredMixin, IsOwnerOrModeratorMixin, DeleteView):
 
 
 
-class MyVillasView(ListView, LoginRequiredMixin):
+class MyVillasView(LoginRequiredMixin, ListView):
     model = Villa
     template_name = "villas/my-villas.html"
     context_object_name = "villas"
@@ -970,7 +970,7 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 
 
 
-class BookingListView(ListView, LoginRequiredMixin):
+class BookingListView(LoginRequiredMixin, ListView):
     model = Booking
     template_name = "bookings/booking-list.html"
 
