@@ -5,13 +5,16 @@ from .forms import BookingForm
 from .models import Booking
 from django.views.generic import ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
 from .tasks import send_booking_confirmation_async
 from django.contrib.auth import login
 from reviews.models import Review
 from datetime import date
 from common.mixins import IsObjectOwnerMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from .models import Booking
+from .forms import BookingEditForm
+
 
 class BookingCreateView(LoginRequiredMixin, CreateView):
     model = Booking
@@ -66,7 +69,12 @@ class BookingListView(ListView):
     template_name = "bookings/booking-list.html"
 
     def get_queryset(self):
-        return Booking.objects.filter(user=self.request.user).select_related("villa")
+        user = self.request.user
+
+        if user.is_superuser or user.groups.filter(name="Moderators").exists():
+            return Booking.objects.all()
+
+        return Booking.objects.filter(user=user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -89,34 +97,33 @@ class BookingListView(ListView):
         return context
 
 
-class BookingEditView(LoginRequiredMixin, IsObjectOwnerMixin, UpdateView):
+class BookingEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Booking
-    form_class = BookingForm
-    template_name = 'bookings/booking-edit.html'
+    form_class = BookingEditForm
+    template_name = "bookings/booking-edit.html"
+    success_url = reverse_lazy("my-bookings")
 
-    def form_valid(self, form):
-        check_in = form.cleaned_data.get("check_in")
-        check_out = form.cleaned_data.get("check_out")
+    def test_func(self):
+        booking = self.get_object()
+        user = self.request.user
 
-
-        overlapping = Booking.objects.filter(
-            villa=self.object.villa,
-            check_in__lt=check_out,
-            check_out__gt=check_in,
-        ).exclude(pk=self.object.pk)
-
-        if overlapping.exists():
-            form.add_error(None, "This villa is already booked for those dates.")
-            return self.form_invalid(form)
-
-        messages.success(self.request, "Booking updated successfully!")
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse_lazy("my-bookings")
-
+        return (
+                user.is_superuser or
+                user.groups.filter(name="Moderators").exists() or
+                booking.user == user
+        )
 
 class BookingDeleteView(LoginRequiredMixin, IsObjectOwnerMixin, DeleteView):
     model = Booking
     template_name = "bookings/booking-delete.html"
     success_url = reverse_lazy("my-bookings")
+
+    def test_func(self):
+        booking = self.get_object()
+        user = self.request.user
+
+        return (
+                user.is_superuser or
+                user.groups.filter(name="Moderators").exists() or
+                booking.user == user
+        )

@@ -37,7 +37,7 @@ class Villa(models.Model):
     )
 
 
-    image_url = models.CharField(max_length=200, blank=True)
+    image = models.ImageField(upload_to="villas/", blank=True, null=True)
 
     villa_type = models.CharField(
         max_length=20,

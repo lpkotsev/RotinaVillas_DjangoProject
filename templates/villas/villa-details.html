@@ -54,7 +54,11 @@
         <!-- RIGHT SIDE (IMAGE) -->
         <div class="col-md-6 text-center">
 
-            <img src="{% static 'images/'|add:villa.image_url %}"
+               {% if villa.image %}
+                  <img src="{{ villa.image.url }}" class="villa-img">
+               {% else %}
+                   <img src="{% static 'images/default-villa.jpg' %}" class="villa-img">
+               {% endif %}
                  class="img-fluid rounded shadow"
                  style="max-height: 400px; width: 100%; object-fit: cover;">
 

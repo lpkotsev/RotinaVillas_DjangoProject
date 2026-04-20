@@ -5,14 +5,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bca539f6-6cfc-462c-9799-e45d02888028" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/media/villas/default-villa.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/default-villa.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/500.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RotinaVillas/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/RotinaVillas/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RotinaVillas/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/RotinaVillas/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/signals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookings/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookings/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookings/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookings/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reviews/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/reviews/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookings/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/amalfi.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/amalfi.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/bali.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/bali.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/california.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/california.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/cape-town.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/cape-town.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/como.png" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/como.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/costa-rica.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/costa-rica.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/dubai.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/dubai.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/ibiza.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/ibiza.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/malibu.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/malibu.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/mykonos.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/mykonos.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/nice.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/nice.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/phuket.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/phuket.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/santorini.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/santorini.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/tuscany.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/tuscany.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/villa1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/villa1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/villa2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/villa2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/villa3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/villa3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/zermatt.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/media/villas/zermatt.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/accounts/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounts/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bookings/booking-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bookings/booking-edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bookings/booking-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bookings/booking-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/common/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/common/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/shared/nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/shared/nav.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/villas/my-villas.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/villas/my-villas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/villas/villa-create.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/villas/villa-create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/villas/villa-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/villas/villa-details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/villas/villa-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/villas/villa-edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/villas/villa-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/villas/villa-list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/villas/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/villas/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/villas/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/villas/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/villas/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/villas/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,8 +62,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -42,29 +78,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Django Server.RotinaVillas.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.pycharm.django.structure.promotion.once.per.project&quot;: &quot;true&quot;,
-    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/lachezar/PycharmProjects/RotinaVillas&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Django Server.RotinaVillas.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
+    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/lachezar/PycharmProjects/RotinaVillas/static/images",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/images" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/media/villas" />
       <recent name="$PROJECT_DIR$/templates/accounts" />
       <recent name="$PROJECT_DIR$/templates/shared" />
     </key>
@@ -120,7 +160,7 @@
       <workItem from="1774633723367" duration="1429000" />
       <workItem from="1776241289527" duration="3073000" />
       <workItem from="1776269099246" duration="35751000" />
-      <workItem from="1776547315994" duration="8523000" />
+      <workItem from="1776547315994" duration="30398000" />
     </task>
     <servers />
   </component>
@@ -132,8 +172,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/villas/views.py</url>
-          <line>114</line>
+          <line>138</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/bookings/views.py</url>
+          <line>6</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

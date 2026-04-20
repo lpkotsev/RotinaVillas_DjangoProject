@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Villa
 from .forms import VillaCreateForm, VillaEditForm
 from django.views import View
@@ -9,6 +9,10 @@ from .forms import VillaSearchForm
 from .forms import VillaFilterForm
 from common.mixins import IsObjectOwnerMixin
 from django.db.models import Q, F
+from .models import Amenity
+
+
+
 
 class VillaListView(ListView):
 
@@ -95,7 +99,7 @@ class VillaCreateView(LoginRequiredMixin, CreateView):
 
 
 
-class VillaEditView(LoginRequiredMixin, IsObjectOwnerMixin, UpdateView):
+class VillaEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     model = Villa
 
@@ -105,12 +109,32 @@ class VillaEditView(LoginRequiredMixin, IsObjectOwnerMixin, UpdateView):
 
     success_url = reverse_lazy("villa-list")
 
+    def test_func(self):
+        villa = self.get_object()
+        user = self.request.user
 
-class VillaDeleteView(LoginRequiredMixin, IsObjectOwnerMixin, DeleteView):
+        return (
+                user.is_superuser or
+                user.groups.filter(name="Moderators").exists() or
+                villa.owner == user
+        )
+
+
+class VillaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     model = Villa
     template_name = "villas/villa-delete.html"
     success_url = reverse_lazy("villa-list")
+
+    def test_func(self):
+        villa = self.get_object()
+        user = self.request.user
+
+        return (
+                user.is_superuser or
+                user.groups.filter(name="Moderators").exists() or
+                villa.owner == user
+        )
 
 class MyVillasView(ListView):
     model = Villa
@@ -118,6 +142,11 @@ class MyVillasView(ListView):
     context_object_name = "villas"
 
     def get_queryset(self):
-        return Villa.objects.filter(owner=self.request.user)
+        user = self.request.user
+
+        if user.is_superuser or user.groups.filter(name="Moderators").exists():
+            return Villa.objects.all()
+
+        return Villa.objects.filter(owner=user)
 
 # Create your views here.

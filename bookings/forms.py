@@ -48,3 +48,32 @@ class BookingForm(forms.ModelForm):
         return cleaned_data
 
 
+class BookingEditForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ['check_in', 'check_out', 'guests']
+
+        widgets = {
+            'check_in': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+            'check_out': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+            'guests': forms.NumberInput(attrs={
+                'class': 'form-control'
+            }),
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        check_in = cleaned_data.get("check_in")
+        check_out = cleaned_data.get("check_out")
+
+        if check_in and check_out:
+            if check_out <= check_in:
+                raise forms.ValidationError("Check-out must be after check-in.")
+
+        return cleaned_data

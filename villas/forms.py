@@ -1,5 +1,6 @@
 from django import forms
 from .models import Villa
+from .models import Amenity
 
 
 class VillaCreateForm(forms.ModelForm):
@@ -13,13 +14,17 @@ class VillaCreateForm(forms.ModelForm):
             "location",
             "villa_type",
             "capacity",
-            "image_url",
+            "image",
+            "amenities",
         ]
         labels = {
             "price_per_night": "Price per night (€)"
         }
         help_texts = {
             "capacity": "Maximum number of guests"
+        }
+        widgets = {
+            "amenities": forms.CheckboxSelectMultiple,
         }
 
 
@@ -39,10 +44,14 @@ class VillaEditForm(forms.ModelForm):
             "description",
             "price_per_night",
             "capacity",
-            "image_url",
+            "image",
             "villa_type",
             "amenities",
         ]
+
+        widgets = {
+            "amenities": forms.CheckboxSelectMultiple,
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -107,3 +116,4 @@ class VillaFilterForm(forms.Form):
         ],
         widget=forms.Select(attrs={"class": "form-control"})
     )
+

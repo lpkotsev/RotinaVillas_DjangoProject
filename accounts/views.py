@@ -6,6 +6,13 @@ from .forms import RegisterForm
 from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
+from django.contrib.auth.views import LoginView
+from .forms import CustomLoginForm
+from .models import Profile
+from .forms import ProfileForm
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import UpdateView, DetailView
+
 
 User = get_user_model()
 
@@ -40,4 +47,38 @@ class UserLoginView(LoginView):
 class UserLogoutView(LogoutView):
     next_page = reverse_lazy("home")
 
-# Create your views here.
+class UserLoginView(LoginView):
+    template_name = "accounts/login.html"
+    authentication_form = CustomLoginForm
+
+class ProfileDetailView(LoginRequiredMixin, DetailView):
+    model = Profile
+    template_name = "accounts/profile.html"
+
+    def get_object(self):
+        profile, created = Profile.objects.get_or_create(user=self.request.user)
+        return profile
+
+
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    form_class = ProfileForm
+    template_name = "accounts/profile.html"   # you are using same template
+
+    def get_object(self):
+        profile, _ = Profile.objects.get_or_create(user=self.request.user)
+        return profile
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        user = self.request.user
+        user.email = form.cleaned_data.get("email")
+        user.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("profile")

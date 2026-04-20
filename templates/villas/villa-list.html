@@ -10,12 +10,12 @@
 
 <div class="row">
 
-    <!-- 🎛️ FILTER SIDEBAR -->
+
     <div class="col-md-3">
 
         <form method="get">
 
-            <!-- 🔍 Search -->
+
             <h5>Search</h5>
             {{ search_form.query }}
 
@@ -37,13 +37,13 @@
 
             <hr>
 
-            <!-- 👥 Guests -->
+
             <h5>Guests</h5>
             {{ filter_form.guests }}
 
             <hr>
 
-            <!-- ↕️ Sorting -->
+
             <h5>Sort</h5>
             {{ filter_form.ordering }}
 
@@ -61,7 +61,7 @@
 
     </div>
 
-    <!-- 🏡 VILLAS -->
+
     <div class="col-md-9">
 
         <div class="row">
@@ -72,9 +72,15 @@
 
                 <div class="card villa-card mb-4 shadow-sm">
 
-                    <img src="{% static 'images/'|add:villa.image_url %}"
-                         class="card-img-top villa-img"
-                         alt="{{ villa.name }}">
+                    {% if villa.image %}
+                       <img src="{{ villa.image.url }}"
+                            class="card-img-top"
+                            alt="{{ villa.name }}">
+                    {% else %}
+                       <img src="{% static 'images/default-villa.jpg' %}"
+                            class="card-img-top"
+                            alt="No image available">
+                    {% endif %}
 
                     <div class="card-body">
 
