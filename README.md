@@ -179,7 +179,7 @@ Example endpoints:
 
 Example .env configuration:
 
-SECRET_KEY=your_secret_key
+SECRET_KEY=your_secret_key_here
 DEBUG=True
 
 DATABASE_URL=postgres://user:password@host:port/db
@@ -191,8 +191,6 @@ EMAIL_PORT=587
 EMAIL_HOST_USER=your_email
 EMAIL_HOST_PASSWORD=your_password
 EMAIL_USE_TLS=True
-
----
 
 ## Deployment (Render)
 
@@ -248,4 +246,4 @@ python manage.py runserver
 
 ## License
 
-This project is for educational purposes as part of the Django Advanced course.
+This project is for educational purposes as part of the Django Advanced course. Created by Lachezar Kotsev

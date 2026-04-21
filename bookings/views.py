@@ -33,7 +33,7 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
         booking.villa = self.villa
         booking.save()
 
-        send_booking_confirmation_async(
+        send_booking_confirmation_async.delay(
             self.request.user.email,
             self.villa.name
         )
