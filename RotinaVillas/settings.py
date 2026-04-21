@@ -10,7 +10,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
+#ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
 
 
 PROJECT_APPS = [
@@ -88,15 +89,18 @@ if not os.getenv("DB_NAME"):
     raise ValueError("Database environment variables are not set")
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST", "localhost"),
-        "PORT": os.getenv("DB_PORT", "5432"),
-    }
+    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
 }
+#DATABASES = {
+    #"default": {
+       # "ENGINE": "django.db.backends.postgresql",
+       # "NAME": os.getenv("DB_NAME"),
+       # "USER": os.getenv("DB_USER"),
+        #"PASSWORD": os.getenv("DB_PASSWORD"),
+        #"HOST": os.getenv("DB_HOST", "localhost"),
+        #"PORT": os.getenv("DB_PORT", "5432"),
+    #}
+#}
 
 CELERY_BROKER_URL = os.getenv("REDIS_URL")
 CELERY_ACCEPT_CONTENT = ['json']
@@ -142,8 +146,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
+#STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 AUTH_USER_MODEL = 'accounts.AppUser'
 
