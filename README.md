@@ -1,214 +1,251 @@
-# RotinaVillas
-
-RotinaVillas is a simple Django web application for browsing and booking vacation villas.  
-The idea of the project is to simulate a small villa rental platform where users can view available villas, make bookings and leave reviews.
-
-This project was created as part of the **Django Basics course at Software University (SoftUni).**
-
----
+# RotinaVillas – Django Web Application
 
 ## Project Overview
 
-The goal of the project is to practice the main concepts of Django:
+RotinaVillas is a full-stack Django web application for browsing and booking villas.  
+The platform supports user authentication, villa management, bookings, reviews, RESTful APIs, and asynchronous background processing.
 
-- Working with models and database relationships
-- Creating forms with validation
-- Using Class-Based Views and Function-Based Views
-- Implementing CRUD operations
-- Working with Django templates and template inheritance
-- Building a structured Django project with multiple apps
-
-The application allows users to browse villas, view detailed information, make bookings and leave reviews.
+This project was developed as part of the Django Advanced Course @ SoftUni and demonstrates best practices in Django architecture, REST API design, and deployment.
 
 ---
 
-## Features
+## Live Demo
 
-### Villas
-- Browse all available villas
-- View detailed information about a villa
-- Create a new villa listing
-- Edit existing villas
-- Delete villas
+https://rotinavillas.onrender.com
 
-### Bookings
-- Create a booking for a villa
-- Prevent overlapping bookings
-- Edit an existing booking
-- Delete bookings
-- View all bookings
+---
 
-### Reviews
-- Leave reviews for villas
-- Give ratings from 1 to 5
-- See reviews left by other users
-- Calculate average rating for each villa
+## Tech Stack
 
-### Other functionality
-- Custom template filters
-- Custom 404 error page
-- Responsive layout using Bootstrap
-- PostgreSQL database
+Backend:
+- Django 5
+- Django REST Framework
+
+Database:
+- PostgreSQL
+
+Async Processing:
+- Celery
+- Redis
+
+Deployment:
+- Render
+- Gunicorn
+- WhiteNoise
+
+Frontend:
+- Django Templates
+- Bootstrap
+
+---
+
+## Authentication and Users
+
+- Custom user model (AppUser) extending AbstractUser
+- Features:
+  - Registration
+  - Login / Logout
+  - Profile management
+
+User Groups:
+- Regular Users
+- Moderators (extended permissions)
 
 ---
 
 ## Project Structure
 
-The project is organized into several Django apps:
+The project is modular and consists of multiple Django apps:
 
-
-RotinaVillas/
-│
-├── common/
-│ pages like Home, About and Contacts
-│
-├── villas/
-│ villa model, forms and views
-│
-├── bookings/
-│ booking functionality
-│
-├── reviews/
-│ review system for villas
-│
-├── templates/
-│ HTML templates for all pages
-│
-├── static/
-│ CSS files and other static resources
-│
-└── RotinaVillas/
-main project configuration
-
-
-
+- accounts – user management  
+- villas – villa listings  
+- bookings – booking system  
+- reviews – user reviews  
+- common – shared logic and mixins  
+- api – REST API endpoints  
 
 ---
 
-## Technologies Used
+## Database Design
 
-The project is built with:
-
-- Python
-- Django
-- PostgreSQL
-- HTML
-- CSS
-- Bootstrap 5
+- Multiple models with:
+  - One-to-Many relationships (User → Bookings)
+  - Many-to-Many relationships (Users ↔ Villas)
+- Model-level validations and clean architecture
 
 ---
 
-## Installation
+## Features
 
-Follow these steps to run the project locally.
+Villas:
+- Browse all villas
+- View villa details
+- Filter and sort listings
 
-### 1. Clone the repository
-## Installation
+Bookings:
+- Create bookings (authenticated users only)
+- Prevent overlapping reservations
+- Edit/Delete bookings (owner or moderator)
 
-Follow these steps to run the project locally.
+Reviews:
+- Users can leave reviews after completed bookings
+- Conditional logic based on booking dates
 
-### 1. Clone the repository
+---
 
+## Email Confirmation
 
-git clone https://github.com/lpkotsev/RotinaVillas_DjangoProject
+After a successful booking:
 
-cd rotinavillas
+- A confirmation email is sent to the user
+- Implemented using Django's send_mail
 
+Development:
+- Console email backend
 
-### 2. Create virtual environment
+Production:
+- SMTP configurable (e.g. Gmail, ABV)
 
+---
+
+## Asynchronous Processing (Celery)
+
+Celery is used for background task execution.
+
+Implemented tasks:
+- Booking confirmation email
+- Scheduled deletion of old bookings
+
+Stack:
+- Celery worker
+- Redis as broker
+
+Note:
+On free hosting environments, tasks may run synchronously if a worker is not deployed.
+
+---
+
+## REST API
+
+The project includes RESTful endpoints using Django REST Framework.
+
+Features:
+- Serializers
+- API Views
+- Permissions (IsAuthenticatedOrReadOnly)
+
+Example endpoints:
+- /api/villas/
+- /api/bookings/
+
+---
+
+## Frontend and Templates
+
+- 17+ dynamic pages
+- Template inheritance with base layout
+- Responsive design using Bootstrap
+- Custom template tags and filters
+- Fully connected navigation
+
+---
+
+## Security
+
+- CSRF protection
+- XSS protection via Django templates
+- Environment variables for sensitive data
+- No hardcoded credentials
+
+---
+
+## Static and Media Handling
+
+- Static files served via WhiteNoise
+- Proper separation:
+  - static/ → source files
+  - staticfiles/ → generated during deployment
+
+---
+
+## Testing
+
+- Unit tests for models, views, and user functionality
+- Minimum 20+ tests included
+
+---
+
+## Environment Variables
+
+Example .env configuration:
+
+SECRET_KEY=your_secret_key
+DEBUG=True
+
+DATABASE_URL=postgres://user:password@host:port/db
+
+REDIS_URL=redis://localhost:6379/0
+
+EMAIL_HOST=smtp.example.com
+EMAIL_PORT=587
+EMAIL_HOST_USER=your_email
+EMAIL_HOST_PASSWORD=your_password
+EMAIL_USE_TLS=True
+
+---
+
+## Deployment (Render)
+
+Steps:
+
+1. Create PostgreSQL service
+2. Set environment variables
+3. Configure build command:
+
+pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
+
+4. Start command:
+
+gunicorn RotinaVillas.wsgi
+
+---
+
+## Local Setup
+
+git clone <repo-url>
+cd RotinaVillas
 
 python -m venv venv
-
-
-Activate it:
-
-Windows
-
-
-venv\Scripts\activate
-
-
-Mac / Linux
-
-
-source venv/bin/activate
-
-
-### 3. Install dependencies
-
+source venv/bin/activate  (Linux/Mac)
+venv\Scripts\activate     (Windows)
 
 pip install -r requirements.txt
 
-
-### 4. Configure database
-
-Update the database settings in:
-
-
-RotinaVillas/settings.py
-
-
-Example configuration:
-
-
-DATABASES = {
-'default': {
-'ENGINE': 'django.db.backends.postgresql',
-'NAME': 'rotinavillas_db',
-'USER': 'postgres',
-'PASSWORD': 'postgres',
-'HOST': 'localhost',
-'PORT': '5432',
-}
-}
-
-
-### 5. Apply migrations
-
-
 python manage.py migrate
-
-
-### 6. Start the development server
-
-
 python manage.py runserver
 
+---
 
-Open the application in your browser:
+## Key Concepts Demonstrated
 
-
-http://127.0.0.1:8000/
-
+- Class-Based Views (CBVs)
+- Custom User Model
+- Forms and Validation
+- REST API design
+- Background tasks with Celery
+- Modular architecture
+- Deployment and environment configuration
 
 ---
 
-## How to Use the Application
+## Notes
 
-After starting the server you can:
-
-- Browse all available villas
-- View details about each villa
-- Create your own villa listing
-- Make bookings for specific dates
-- Leave reviews and ratings
-
-Navigation links are available in the top menu for all main pages.
+- Static files must be placed in static/, not staticfiles/
+- collectstatic is required in production
+- Large media files should be optimized
 
 ---
 
-## Future Improvements
+## License
 
-Some possible improvements for the project:
-
-- Add user authentication
-- Add villa image uploads
-- Improve search and filtering
-- Add pagination for large lists
-
----
-
-## Author
-
-Project created by Lachezar Kotsev
+This project is for educational purposes as part of the Django Advanced course.
